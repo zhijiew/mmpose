@@ -105,7 +105,10 @@ class OneHand10KDataset(Kpt2dSviewRgbImgTopDownDataset):
                 joints_3d_visible = np.zeros((num_joints, 3), dtype=np.float32)
 
                 keypoints = np.array(obj['keypoints']).reshape(-1, 3)
+#                 try:
                 joints_3d[:, :2] = keypoints[:, :2]
+#                 except ValueError:
+#                     import ipdb;ipdb.set_trace()
                 joints_3d_visible[:, :2] = np.minimum(1, keypoints[:, 2:3])
 
                 image_file = osp.join(self.img_prefix, self.id2name[img_id])
